@@ -16,7 +16,7 @@ Expected outcome
 Every participant sees 25 lottery pairs. The task is adaptive: each pair is shown several times
 (84 choices in total, according to Frey et al.), and after every choice Lottery A (X) is changed
 a bit depending on what the person picked, while Lottery B (Z) stays the same.
-The data only keeps the last two times each pair was shown, so there are 2 rows per pair and
+The data only keeps the two times each pair was shown, so there are 2 rows per pair and
 50 choices per person. The "Stage" column tells you which step it was: the lower number is the
 earlier one, the higher number is the changed version.
   
