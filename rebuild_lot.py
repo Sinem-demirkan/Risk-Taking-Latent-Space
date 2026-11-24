@@ -1,19 +1,25 @@
-"""Rebuild the LOT transcripts from Frey's raw data, with the wording of Psych-201.
+"""Rebuild the LOT transcripts from Frey's raw data, using the wording provided by Psych-201.
 
 Inputs
-  ~/bbrs/data__main__lotteries__lotteries.csv     content: one row per choice (Frey et al., 2017)
-  /scratch/sdemirka/psych201_frey.parquet         wording: instructions and sentence format (Psych-201)
+  data__main__lotteries__lotteries.csv     csv of raw data from the actual study, one row per choice (Frey et al., 2017)
+  psych201_frey.parquet         instructions and sentence format from Psych-201, basically it is the description of experiments in natural language together with participant responses.
 
 Output
-  ~/hcp_explore/data/transcripts_rebuilt/lot_transcripts.csv     columns: partid, text
+  transcripts_rebuilt/lot_transcripts.csv     columns: partid, text
 
 Expected outcome
-  Frey CSV: 1507 people | Psych-201: 1407 people
+  Frey CSV: 1507 people | Psych-201: 1407 people (because Psych-201 holds-out a test set, different set of people for each of the 5 tasks.)
   excluded: 0 [] | kept: 1507
   identical to Psych-201: 1407 of 1407
   saved 1507 people -> .../transcripts_rebuilt/lot_transcripts.csv
 
-  Each participant has 25 lottery pairs with 2 rows each (two steps of the adaptive procedure).
+Every participant sees 25 lottery pairs. The task is adaptive: each pair is shown several times
+(84 choices in total, according to Frey et al.), and after every choice Lottery A (X) is changed
+a bit depending on what the person picked, while Lottery B (Z) stays the same.
+The data only keeps the last two times each pair was shown, so there are 2 rows per pair and
+50 choices per person. The "Stage" column tells you which step it was: the lower number is the
+earlier one, the higher number is the changed version.
+  
   A participant is excluded if a value is missing, a pair does not have exactly 2 rows, or there are not 25 pairs.
   If any transcript differs from Psych-201, the first difference is printed and nothing is saved.
 """
